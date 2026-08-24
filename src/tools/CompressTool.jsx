@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FileDown, File, CheckCircle2, RefreshCw, Sliders, ShieldCheck } from 'lucide-react'
 
+
 export default function CompressTool() {
   const [file, setFile] = useState(null)
   const [pageCount, setPageCount] = useState(0)
@@ -64,7 +65,7 @@ export default function CompressTool() {
       const result = await new Promise((resolve, reject) => {
         const psDataURL = URL.createObjectURL(file)
         const worker = new Worker('/background-worker.js')
-        
+
         const cleanup = () => {
           URL.revokeObjectURL(psDataURL)
           worker.terminate()
@@ -77,16 +78,16 @@ export default function CompressTool() {
             setProgress(Math.round((pageNum / total) * 100))
             return
           }
-          
+
           try {
             if (e.data.error) {
               throw new Error(e.data.error)
             }
-            
+
             // Fetch compressed file from worker's output URL
             const response = await fetch(e.data.pdfDataURL)
             const arrayBuffer = await response.arrayBuffer()
-            
+
             resolve({
               bytes: new Uint8Array(arrayBuffer),
               size: arrayBuffer.byteLength,
@@ -161,7 +162,7 @@ export default function CompressTool() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizesArr[i]
   }
 
-  const savingsPercent = sizes.compressed 
+  const savingsPercent = sizes.compressed
     ? Math.max(0, ((sizes.original - sizes.compressed) / sizes.original) * 100).toFixed(1)
     : 0
 
@@ -225,11 +226,10 @@ export default function CompressTool() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <button
                 onClick={() => setLevel('light')}
-                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${
-                  level === 'light'
+                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${level === 'light'
                     ? 'bg-blue-600/10 border-blue-500 text-zinc-100'
                     : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
-                }`}
+                  }`}
               >
                 <span className="text-xs font-bold">Light Compression</span>
                 <span className="text-[10px] leading-normal text-zinc-500">
@@ -239,11 +239,10 @@ export default function CompressTool() {
 
               <button
                 onClick={() => setLevel('medium')}
-                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${
-                  level === 'medium'
+                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${level === 'medium'
                     ? 'bg-blue-600/10 border-blue-500 text-zinc-100'
                     : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
-                }`}
+                  }`}
               >
                 <span className="text-xs font-bold">Medium Compression</span>
                 <span className="text-[10px] leading-normal text-zinc-500">
@@ -253,11 +252,10 @@ export default function CompressTool() {
 
               <button
                 onClick={() => setLevel('heavy')}
-                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${
-                  level === 'heavy'
+                className={`p-4 rounded-xl border flex flex-col gap-1 text-left transition-colors select-none ${level === 'heavy'
                     ? 'bg-blue-600/10 border-blue-500 text-zinc-100'
                     : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200'
-                }`}
+                  }`}
               >
                 <span className="text-xs font-bold">Heavy Compression</span>
                 <span className="text-[10px] leading-normal text-zinc-500">
@@ -273,8 +271,8 @@ export default function CompressTool() {
               <div className="flex items-center justify-between text-xs text-zinc-400">
                 <span className="flex items-center gap-1.5">
                   <RefreshCw className="w-3 h-3 animate-spin text-blue-500" />
-                  {progress > 0 
-                    ? `Optimizing streams and pages...` 
+                  {progress > 0
+                    ? `Optimizing streams and pages...`
                     : `Initializing Ghostscript WebAssembly runtime...`
                   }
                 </span>
