@@ -1,6 +1,68 @@
 import React, { useState, useEffect } from 'react'
-import { LayoutDashboard, FileUp, Scissors, RotateCw, Trash2, FileDown, Maximize2, FolderArchive, RefreshCw, Menu, ShieldCheck } from 'lucide-react'
+import {
+  LayoutDashboard,
+  FileUp,
+  Scissors,
+  RotateCw,
+  Trash2,
+  FileDown,
+  Maximize2,
+  FolderArchive,
+  Image,
+  FileImage,
+  FileText,
+  FileSpreadsheet,
+  FileCode,
+  Layers,
+  Menu,
+  ShieldCheck,
+  ShieldAlert,
+  Lock,
+  Unlock,
+  EyeOff,
+  Fingerprint,
+  FileSearch,
+  PenTool,
+  Stamp,
+  Binary,
+  FormInput,
+  Highlighter,
+  GitCompare,
+  Moon,
+  RefreshCw
+} from 'lucide-react'
+
+// Tools
 import Dashboard from './tools/Dashboard.jsx'
+
+// Editing, Signing & Annotations Tools
+import SignPdfTool from './tools/SignPdfTool.jsx'
+import WatermarkTool from './tools/WatermarkTool.jsx'
+import PageNumbersTool from './tools/PageNumbersTool.jsx'
+import FillFormTool from './tools/FillFormTool.jsx'
+import AnnotatePdfTool from './tools/AnnotatePdfTool.jsx'
+import ComparePdfTool from './tools/ComparePdfTool.jsx'
+import InvertColorsTool from './tools/InvertColorsTool.jsx'
+
+// Security, Privacy & Compliance Tools
+import PrivacyScannerTool from './tools/PrivacyScannerTool.jsx'
+import RedactTool from './tools/RedactTool.jsx'
+import EncryptPdfTool from './tools/EncryptPdfTool.jsx'
+import UnlockPdfTool from './tools/UnlockPdfTool.jsx'
+import MetadataEditorTool from './tools/MetadataEditorTool.jsx'
+import FlattenPdfTool from './tools/FlattenPdfTool.jsx'
+import FingerprintTool from './tools/FingerprintTool.jsx'
+
+// Document Conversion Tools
+import PdfToJpgTool from './tools/PdfToJpgTool.jsx'
+import ImagesToPdfTool from './tools/ImagesToPdfTool.jsx'
+import WordToPdfTool from './tools/WordToPdfTool.jsx'
+import PdfToWordTool from './tools/PdfToWordTool.jsx'
+import ExcelToPdfTool from './tools/ExcelToPdfTool.jsx'
+import MarkdownToPdfTool from './tools/MarkdownToPdfTool.jsx'
+import ExtractTextTool from './tools/ExtractTextTool.jsx'
+
+// Page Management Tools
 import MergeTool from './tools/MergeTool.jsx'
 import SplitTool from './tools/SplitTool.jsx'
 import RotateTool from './tools/RotateTool.jsx'
@@ -8,6 +70,7 @@ import OrganizeTool from './tools/OrganizeTool.jsx'
 import CompressTool from './tools/CompressTool.jsx'
 import CropResizeTool from './tools/CropResizeTool.jsx'
 import PdfToZipTool from './tools/PdfToZipTool.jsx'
+
 import { J } from './utils/loader.js'
 
 export default function App() {
@@ -30,8 +93,37 @@ export default function App() {
       })
   }, [activeTool])
 
-  const menuItems = [
-    { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
+  const editingMenuItems = [
+    { id: 'signpdf', name: 'Sign PDF', icon: PenTool },
+    { id: 'watermark', name: 'Add Watermark', icon: Stamp },
+    { id: 'pagenumbers', name: 'Page Numbers & Bates', icon: Binary },
+    { id: 'fillform', name: 'Fill PDF Forms', icon: FormInput },
+    { id: 'annotatepdf', name: 'Annotate & Markup', icon: Highlighter },
+    { id: 'comparepdf', name: 'Compare PDFs', icon: GitCompare },
+    { id: 'invertcolors', name: 'Invert & Dark Mode', icon: Moon }
+  ]
+
+  const securityMenuItems = [
+    { id: 'privacyscanner', name: 'Privacy & PII Scanner', icon: ShieldAlert },
+    { id: 'redact', name: 'Redact & Blackout', icon: EyeOff },
+    { id: 'encryptpdf', name: 'Protect & Encrypt', icon: Lock },
+    { id: 'unlockpdf', name: 'Unlock & Decrypt', icon: Unlock },
+    { id: 'metadata', name: 'Metadata Sanitizer', icon: FileSearch },
+    { id: 'flatten', name: 'Flatten Document', icon: Layers },
+    { id: 'fingerprint', name: 'Watermark & Fingerprint', icon: Fingerprint }
+  ]
+
+  const conversionMenuItems = [
+    { id: 'pdftojpg', name: 'PDF to JPG / PNG', icon: Image },
+    { id: 'imagestopdf', name: 'Images to PDF', icon: FileImage },
+    { id: 'wordtopdf', name: 'Word to PDF', icon: FileText },
+    { id: 'pdftoword', name: 'PDF to Word', icon: FileText },
+    { id: 'exceltopdf', name: 'Excel to PDF', icon: FileSpreadsheet },
+    { id: 'markdowntopdf', name: 'Markdown to PDF', icon: FileCode },
+    { id: 'extracttext', name: 'Extract Text', icon: Layers }
+  ]
+
+  const pageManagementMenuItems = [
     { id: 'merge', name: 'Merge PDFs', icon: FileUp },
     { id: 'split', name: 'Split PDF', icon: Scissors },
     { id: 'rotatepdf', name: 'Rotate PDF', icon: RotateCw },
@@ -50,7 +142,7 @@ export default function App() {
     if (loadingDeps) {
       return (
         <div className="flex flex-col items-center justify-center flex-1 h-[60vh] gap-4">
-          <div className="w-12 h-12 border-4 border-zinc-700 border-t-blue-500 rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-zinc-700 border-t-amber-500 rounded-full animate-spin"></div>
           <p className="text-zinc-400 text-sm animate-pulse font-medium">Securing local client libraries...</p>
         </div>
       )
@@ -59,6 +151,56 @@ export default function App() {
     switch (activeTool) {
       case 'dashboard':
         return <Dashboard onSelectTool={handleToolSelect} />
+
+      // Editing, Signing & Annotations Suite
+      case 'signpdf':
+        return <SignPdfTool />
+      case 'watermark':
+        return <WatermarkTool />
+      case 'pagenumbers':
+        return <PageNumbersTool />
+      case 'fillform':
+        return <FillFormTool />
+      case 'annotatepdf':
+        return <AnnotatePdfTool />
+      case 'comparepdf':
+        return <ComparePdfTool />
+      case 'invertcolors':
+        return <InvertColorsTool />
+
+      // Security, Privacy & Compliance Suite
+      case 'privacyscanner':
+        return <PrivacyScannerTool />
+      case 'redact':
+        return <RedactTool />
+      case 'encryptpdf':
+        return <EncryptPdfTool />
+      case 'unlockpdf':
+        return <UnlockPdfTool />
+      case 'metadata':
+        return <MetadataEditorTool />
+      case 'flatten':
+        return <FlattenPdfTool />
+      case 'fingerprint':
+        return <FingerprintTool />
+
+      // Document Conversion Suite
+      case 'pdftojpg':
+        return <PdfToJpgTool />
+      case 'imagestopdf':
+        return <ImagesToPdfTool />
+      case 'wordtopdf':
+        return <WordToPdfTool />
+      case 'pdftoword':
+        return <PdfToWordTool />
+      case 'exceltopdf':
+        return <ExcelToPdfTool />
+      case 'markdowntopdf':
+        return <MarkdownToPdfTool />
+      case 'extracttext':
+        return <ExtractTextTool />
+
+      // Page Management Suite
       case 'merge':
         return <MergeTool />
       case 'split':
@@ -73,47 +215,156 @@ export default function App() {
         return <CropResizeTool />
       case 'pdftozip':
         return <PdfToZipTool />
+
       default:
         return <Dashboard onSelectTool={handleToolSelect} />
     }
   }
+
+  const allItems = [
+    { id: 'dashboard', name: 'Dashboard' },
+    ...editingMenuItems,
+    ...securityMenuItems,
+    ...conversionMenuItems,
+    ...pageManagementMenuItems
+  ]
 
   return (
     <div className="flex h-screen w-full bg-zinc-950 text-zinc-100 overflow-hidden font-sans">
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-64 flex-col bg-zinc-900 border-r border-zinc-800 shrink-0">
         <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-800 select-none">
-          <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center border border-blue-500/20">
-            <ShieldCheck className="w-5 h-5 text-blue-400" />
+          <div className="w-8 h-8 bg-amber-500/10 rounded-lg flex items-center justify-center border border-amber-500/20">
+            <ShieldCheck className="w-5 h-5 text-amber-400" />
           </div>
           <span className="text-lg font-bold tracking-tight text-white">OpenPDF</span>
         </div>
-        <nav className="flex-1 py-6 px-4 space-y-1">
-          {menuItems.map((item) => {
-            const Icon = item.icon
-            const active = activeTool === item.id
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleToolSelect(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors select-none text-left ${
-                  active
-                    ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-600/10'
-                    : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
-                }`}
-              >
-                <Icon className="w-4 h-4 shrink-0" />
-                <span className="text-sm">{item.name}</span>
-              </button>
-            )
-          })}
+
+        <nav className="flex-1 py-4 px-3 space-y-6 overflow-y-auto">
+          {/* Main */}
+          <button
+            onClick={() => handleToolSelect('dashboard')}
+            className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+              activeTool === 'dashboard'
+                ? 'bg-amber-500 text-zinc-950 font-bold shadow-md shadow-amber-500/10'
+                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+            }`}
+          >
+            <LayoutDashboard className="w-4 h-4 shrink-0" />
+            <span className="text-xs font-semibold">Dashboard</span>
+          </button>
+
+          {/* Editing & Annotations Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1.5 flex items-center justify-between">
+              <span>Editing & Annotations</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-amber-500/10 rounded text-amber-400">7</span>
+            </div>
+            {editingMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-amber-500 text-zinc-950 font-bold shadow-md shadow-amber-500/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Security Suite Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 mb-1.5 flex items-center justify-between">
+              <span>Security & Privacy</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-emerald-500/10 rounded text-emerald-400">7</span>
+            </div>
+            {securityMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-emerald-600 text-white font-medium shadow-md shadow-emerald-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Conversion Suite Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-blue-400/80 mb-1.5 flex items-center justify-between">
+              <span>Conversion Suite</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-blue-500/10 rounded text-blue-400">7</span>
+            </div>
+            {conversionMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Page Management Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-purple-400/80 mb-1.5 flex items-center justify-between">
+              <span>Page Management</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-purple-500/10 rounded text-purple-400">7</span>
+            </div>
+            {pageManagementMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-purple-600 text-white font-medium shadow-md shadow-purple-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
         </nav>
+
         <div className="p-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-500">
           <span className="flex items-center gap-1.5">
-            <span className="w-2 x-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-            Offline Sandbox
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+            100% Client-Side
           </span>
-          <span>v0.1.0</span>
+          <span className="font-mono text-[11px] text-amber-400">28 Tools Active</span>
         </div>
       </aside>
 
@@ -132,26 +383,107 @@ export default function App() {
         }`}
       >
         <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-800">
-          <ShieldCheck className="w-5 h-5 text-blue-400" />
+          <ShieldCheck className="w-5 h-5 text-amber-400" />
           <span className="text-lg font-bold tracking-tight text-white">OpenPDF</span>
         </div>
-        <nav className="flex-1 py-6 px-4 space-y-1">
-          {menuItems.map((item) => {
-            const Icon = item.icon
-            const active = activeTool === item.id
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleToolSelect(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-left ${
-                  active ? 'bg-blue-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
-                }`}
-              >
-                <Icon className="w-4 h-4 shrink-0" />
-                <span className="text-sm">{item.name}</span>
-              </button>
-            )
-          })}
+        <nav className="flex-1 py-4 px-3 space-y-4 overflow-y-auto">
+          <button
+            onClick={() => handleToolSelect('dashboard')}
+            className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+              activeTool === 'dashboard' ? 'bg-amber-500 text-zinc-950 font-bold' : 'text-zinc-400 hover:text-zinc-100'
+            }`}
+          >
+            <LayoutDashboard className="w-4 h-4 shrink-0" />
+            <span className="text-xs font-semibold">Dashboard</span>
+          </button>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1">
+              Editing & Annotations (7)
+            </div>
+            {editingMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-amber-500 text-zinc-950 font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 mb-1">
+              Security & Privacy (7)
+            </div>
+            {securityMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-emerald-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-blue-400/80 mb-1">
+              Conversion Suite (7)
+            </div>
+            {conversionMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-blue-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-purple-400/80 mb-1">
+              Page Management (7)
+            </div>
+            {pageManagementMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-purple-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
         </nav>
       </aside>
 
@@ -167,16 +499,16 @@ export default function App() {
               <Menu className="w-5 h-5" />
             </button>
             <h1 className="text-base font-semibold tracking-tight text-white hidden md:block">
-              {menuItems.find((m) => m.id === activeTool)?.name || 'Dashboard'}
+              {allItems.find((m) => m.id === activeTool)?.name || 'Dashboard'}
             </h1>
             <span className="text-zinc-400 text-xs px-2 py-1 rounded bg-zinc-800 border border-zinc-700 font-medium md:hidden">
-              {menuItems.find((m) => m.id === activeTool)?.name || 'Dashboard'}
+              {allItems.find((m) => m.id === activeTool)?.name || 'Dashboard'}
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-[11px] text-zinc-500 font-medium hidden sm:flex items-center gap-1.5 bg-zinc-950 border border-zinc-800 px-3 py-1.5 rounded-lg">
+            <div className="text-[11px] text-zinc-400 font-medium hidden sm:flex items-center gap-1.5 bg-zinc-950 border border-zinc-800 px-3 py-1.5 rounded-lg">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
-              Secure local runtime (Files never leave device)
+              Secure local runtime (Zero server uploads)
             </div>
           </div>
         </header>

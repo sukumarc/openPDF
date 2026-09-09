@@ -12,17 +12,48 @@ export const Y = {
   pdfmake: "https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/pdfmake.min.js",
   pdfmakefonts: "https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/vfs_fonts.js",
   docxpreview: "https://cdn.jsdelivr.net/npm/docx-preview@0.3.5/dist/docx-preview.min.js",
-  html2pdf: "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+  html2pdf: "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js",
+  xlsx: "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js",
+  docx: "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js",
+  dompurify: "https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"
 };
 
 export const mo = {
+  // Page Management Suite
   merge: ["pdflib", "downloadjs", "pdfjs"],
   split: ["pdflib", "downloadjs", "jszip"],
   rotatepdf: ["pdflib", "pdfjs", "downloadjs"],
   organize: ["pdflib", "pdfjs", "downloadjs"],
   compress: ["pdflib", "pdfjs", "downloadjs", "jspdf"],
   cropresize: ["pdflib", "pdfjs", "downloadjs"],
-  pdftozip: ["pdfjs", "downloadjs", "jszip"]
+  pdftozip: ["pdfjs", "downloadjs", "jszip"],
+
+  // Document Conversion Suite
+  pdftojpg: ["pdfjs", "downloadjs", "jszip"],
+  imagestopdf: ["pdflib", "downloadjs"],
+  wordtopdf: ["mammoth", "docxpreview", "jspdf", "html2canvas", "downloadjs"],
+  pdftoword: ["pdfjs", "docx", "downloadjs"],
+  exceltopdf: ["xlsx", "jspdf", "downloadjs"],
+  markdowntopdf: ["marked", "jspdf", "html2canvas", "dompurify", "downloadjs"],
+  extracttext: ["pdfjs", "downloadjs"],
+
+  // Security, Privacy & Compliance Suite
+  encryptpdf: ["pdflib", "downloadjs"],
+  unlockpdf: ["pdfjs", "pdflib", "downloadjs"],
+  redact: ["pdfjs", "pdflib", "downloadjs"],
+  flatten: ["pdflib", "downloadjs"],
+  privacyscanner: ["pdfjs", "pdflib", "downloadjs"],
+  metadata: ["pdflib", "downloadjs"],
+  fingerprint: ["pdfjs", "pdflib", "downloadjs"],
+
+  // Editing, Signing & Annotations Suite
+  signpdf: ["pdflib", "pdfjs", "downloadjs"],
+  watermark: ["pdflib", "pdfjs", "downloadjs"],
+  pagenumbers: ["pdflib", "pdfjs", "downloadjs"],
+  fillform: ["pdflib", "pdfjs", "downloadjs"],
+  annotatepdf: ["pdflib", "pdfjs", "downloadjs"],
+  comparepdf: ["pdfjs", "downloadjs"],
+  invertcolors: ["pdfjs", "pdflib", "downloadjs"]
 };
 
 // Promise-based script loading helper
