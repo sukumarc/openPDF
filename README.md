@@ -1,6 +1,6 @@
 # OpenPDF 🔐
 
-OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **35 essential tools** across Smart & Advanced Utilities, Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
+OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **42 essential tools** across Specialized Formats & Archival, Smart & Advanced Utilities, Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
 
 ---
 
@@ -12,7 +12,16 @@ OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite ru
 
 ---
 
-## 🛠️ Complete Tool Suite (35 Tools)
+## 🛠️ Complete Tool Suite (42 Tools)
+
+### 📚 Specialized Formats, Archival & Publishing Suite (7 Tools)
+1.  **PowerPoint (.pptx) to PDF:** In-memory XML presentation unpacker extracting shapes, slide text hierarchies, and embedded graphics into formatted vector PDF slides.
+2.  **eBook (.epub) to PDF:** Typeset EPUB digital books into paginated volumes with custom typography scales, classic margins, decorative cover art, and chapter breaks.
+3.  **HTML & Code to PDF:** Live split-pane HTML/CSS sandbox code editor and file converter rendering styled high-DPI (2.0x) PDF documents.
+4.  **PDF to Grayscale & Monochrome:** Transform full-color PDFs to pure luminance grayscale or high-contrast 1-bit B&W with fine-tuning contrast/brightness controls.
+5.  **Booklet & Imposition Creator:** Saddle-stitch 2-up imposition calculator for printing double-sided foldable brochures, manuals, and booklets.
+6.  **Margin & Binder Adjuster:** Add customizable margins, gutters, and punch hole clearance for 3-hole binders, spiral bindings, and clipboards.
+7.  **PDF/A Archival Validator & Sanitizer:** Audit ISO 19005 compliance (PDF/A-1b/2b), verify font embeddings, and inject valid XMP archival metadata.
 
 ### 🚀 Advanced & Smart Utilities Suite (7 Tools)
 1.  **OCR PDF (Optical Character Recognition):** On-device WebAssembly OCR powered by `tesseract.js` to convert scanned image PDFs into searchable, selectable text PDFs with bounding box previews and editable text export.

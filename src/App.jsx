@@ -36,11 +36,26 @@ import {
   Mic,
   ImageDown,
   Radio,
-  RefreshCw
+  RefreshCw,
+  Presentation,
+  BookOpen,
+  Palette,
+  BookCopy,
+  BoxSelect,
+  FileCheck
 } from 'lucide-react'
 
 // Tools
 import Dashboard from './tools/Dashboard.jsx'
+
+// Specialized Formats, Archival & Publishing Tools (Category 6)
+import PptxToPdfTool from './tools/PptxToPdfTool.jsx'
+import EpubToPdfTool from './tools/EpubToPdfTool.jsx'
+import HtmlToPdfTool from './tools/HtmlToPdfTool.jsx'
+import GrayscaleTool from './tools/GrayscaleTool.jsx'
+import BookletTool from './tools/BookletTool.jsx'
+import MarginAdjusterTool from './tools/MarginAdjusterTool.jsx'
+import PdfAValidatorTool from './tools/PdfAValidatorTool.jsx'
 
 // Advanced & Smart Utilities Tools (Category 5)
 import OcrPdfTool from './tools/OcrPdfTool.jsx'
@@ -108,6 +123,16 @@ export default function App() {
         setLoadingDeps(false)
       })
   }, [activeTool])
+
+  const specializedMenuItems = [
+    { id: 'pptxtopdf', name: 'PowerPoint to PDF', icon: Presentation },
+    { id: 'epubtopdf', name: 'eBook to PDF', icon: BookOpen },
+    { id: 'htmltopdf', name: 'HTML & Code to PDF', icon: FileCode },
+    { id: 'grayscale', name: 'PDF to Grayscale', icon: Palette },
+    { id: 'booklet', name: 'Booklet Imposition', icon: BookCopy },
+    { id: 'margins', name: 'Margin & Binder', icon: BoxSelect },
+    { id: 'pdfavalidator', name: 'PDF/A Validator', icon: FileCheck }
+  ]
 
   const smartMenuItems = [
     { id: 'ocrpdf', name: 'OCR PDF', icon: ScanText },
@@ -177,6 +202,22 @@ export default function App() {
     switch (activeTool) {
       case 'dashboard':
         return <Dashboard onSelectTool={handleToolSelect} />
+
+      // Specialized Formats, Archival & Publishing Suite
+      case 'pptxtopdf':
+        return <PptxToPdfTool />
+      case 'epubtopdf':
+        return <EpubToPdfTool />
+      case 'htmltopdf':
+        return <HtmlToPdfTool />
+      case 'grayscale':
+        return <GrayscaleTool />
+      case 'booklet':
+        return <BookletTool />
+      case 'margins':
+        return <MarginAdjusterTool />
+      case 'pdfavalidator':
+        return <PdfAValidatorTool />
 
       // Advanced & Smart Utilities Suite
       case 'ocrpdf':
@@ -265,6 +306,7 @@ export default function App() {
 
   const allItems = [
     { id: 'dashboard', name: 'Dashboard' },
+    ...specializedMenuItems,
     ...smartMenuItems,
     ...editingMenuItems,
     ...securityMenuItems,
@@ -401,6 +443,32 @@ export default function App() {
             })}
           </div>
 
+          {/* Specialized Formats, Archival & Publishing Suite Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1.5 flex items-center justify-between">
+              <span>Archival & Publishing</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-teal-500/10 rounded text-teal-400">7</span>
+            </div>
+            {specializedMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-teal-600 text-white font-bold shadow-md shadow-teal-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
           {/* Page Management Group */}
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-purple-400/80 mb-1.5 flex items-center justify-between">
@@ -433,7 +501,7 @@ export default function App() {
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
             100% Client-Side
           </span>
-          <span className="font-mono text-[11px] text-violet-400">35 Tools Active</span>
+          <span className="font-mono text-[11px] text-teal-400">42 Tools Active</span>
         </div>
       </aside>
 
@@ -465,6 +533,28 @@ export default function App() {
             <LayoutDashboard className="w-4 h-4 shrink-0" />
             <span className="text-xs font-semibold">Dashboard</span>
           </button>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1">
+              Archival & Publishing (7)
+            </div>
+            {specializedMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-teal-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
 
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1">

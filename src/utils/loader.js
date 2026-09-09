@@ -63,7 +63,16 @@ export const mo = {
   pdftoaudio: ["pdfjs", "downloadjs"],
   audiotopdf: ["pdflib", "downloadjs"],
   extractimages: ["pdfjs", "jszip", "downloadjs"],
-  p2pshare: ["downloadjs"]
+  p2pshare: ["downloadjs"],
+
+  // Specialized Formats, Archival & Publishing Suite
+  pptxtopdf: ["jszip", "pdflib", "downloadjs"],
+  epubtopdf: ["jszip", "jspdf", "dompurify", "downloadjs"],
+  htmltopdf: ["html2canvas", "jspdf", "dompurify", "downloadjs"],
+  grayscale: ["pdfjs", "pdflib", "downloadjs"],
+  booklet: ["pdflib", "pdfjs", "downloadjs"],
+  margins: ["pdflib", "pdfjs", "downloadjs"],
+  pdfavalidator: ["pdflib", "pdfjs", "downloadjs"]
 };
 
 // Promise-based script loading helper

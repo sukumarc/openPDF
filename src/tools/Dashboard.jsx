@@ -35,7 +35,13 @@ import {
   Mic,
   ImageDown,
   Radio,
-  ArrowRight
+  ArrowRight,
+  Presentation,
+  BookOpen,
+  Palette,
+  BookCopy,
+  BoxSelect,
+  FileCheck
 } from 'lucide-react'
 
 export default function Dashboard({ onSelectTool }) {
@@ -299,6 +305,58 @@ export default function Dashboard({ onSelectTool }) {
     }
   ]
 
+  const specializedTools = [
+    {
+      id: 'pptxtopdf',
+      name: 'PowerPoint (.pptx) to PDF',
+      desc: 'Unzip presentations in memory, extract slide shapes & graphics, and compile formatted PDF slides.',
+      icon: Presentation,
+      badge: 'Archival'
+    },
+    {
+      id: 'epubtopdf',
+      name: 'eBook (.epub) to PDF',
+      desc: 'Typeset EPUB books into paginated volumes with custom typography, cover art, and chapter breaks.',
+      icon: BookOpen,
+      badge: 'Archival'
+    },
+    {
+      id: 'htmltopdf',
+      name: 'HTML & Code to PDF',
+      desc: 'Live HTML/CSS sandbox editor and web code converter rendering styled high-DPI PDF documents.',
+      icon: FileCode,
+      badge: 'Publishing'
+    },
+    {
+      id: 'grayscale',
+      name: 'PDF to Grayscale',
+      desc: 'Convert full-color documents to monochrome grayscale or high-contrast 1-bit B&W for toner saving.',
+      icon: Palette,
+      badge: 'Publishing'
+    },
+    {
+      id: 'booklet',
+      name: 'Booklet & Imposition',
+      desc: 'Saddle-stitch 2-up imposition calculator for printing double-sided foldable magazines and booklets.',
+      icon: BookCopy,
+      badge: 'Publishing'
+    },
+    {
+      id: 'margins',
+      name: 'Margin & Binder Adjuster',
+      desc: 'Expand page borders and add custom gutters for 3-hole binder punching and spiral coil binding.',
+      icon: BoxSelect,
+      badge: 'Publishing'
+    },
+    {
+      id: 'pdfavalidator',
+      name: 'PDF/A Archival Validator',
+      desc: 'Audit ISO 19005 compliance, verify font embeddings, and sanitize metadata for permanent archival.',
+      icon: FileCheck,
+      badge: 'Archival'
+    }
+  ]
+
   return (
     <div className="space-y-10 max-w-5xl mx-auto">
       {/* Welcome Banner */}
@@ -316,7 +374,7 @@ export default function Dashboard({ onSelectTool }) {
             <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side Private
           </div>
           <div className="flex items-center gap-1.5 text-[11px] font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1.5 rounded-full select-none">
-            <Cpu className="w-3.5 h-3.5" /> 35 In-Browser Tools
+            <Cpu className="w-3.5 h-3.5" /> 42 In-Browser Tools
           </div>
         </div>
       </section>
@@ -510,6 +568,46 @@ export default function Dashboard({ onSelectTool }) {
                   {tool.badge}
                 </div>
                 <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-purple-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Specialized Formats, Archival & Publishing Suite Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-teal-500"></span>
+              Specialized Formats, Archival & Publishing Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">PowerPoint & EPUB conversion, live HTML sandbox, grayscale filter, booklet imposition, and ISO PDF/A validator</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {specializedTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-teal-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-teal-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-teal-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-teal-500/10 border border-teal-500/20 text-teal-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-teal-400 transition-colors">
                   {tool.name}
                 </h4>
                 <p className="text-zinc-400 text-xs leading-relaxed">
