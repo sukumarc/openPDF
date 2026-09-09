@@ -114,7 +114,7 @@ export default function RepairPdfTool() {
         // Tier 2: Ghostscript WebAssembly Engine
         if (window.Worker) {
           logEntries.push('Stage 2: Invoking Ghostscript WebAssembly repair engine...')
-          const worker = new Worker('/background-worker.js', { type: 'module' })
+          const worker = new Worker(`${import.meta.env.BASE_URL}background-worker.js`, { type: 'module' })
 
           repairedPdfBytes = await new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {

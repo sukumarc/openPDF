@@ -64,7 +64,7 @@ export default function CompressTool() {
 
       const result = await new Promise((resolve, reject) => {
         const psDataURL = URL.createObjectURL(file)
-        const worker = new Worker('/background-worker.js')
+        const worker = new Worker(`${import.meta.env.BASE_URL}background-worker.js`)
 
         const cleanup = () => {
           URL.revokeObjectURL(psDataURL)
