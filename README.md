@@ -1,18 +1,27 @@
 # OpenPDF 🔐
 
-OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **28 essential tools** across Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
+OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **35 essential tools** across Smart & Advanced Utilities, Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
 
 ---
 
 ## 🌟 The Core Philosophies
-*   **100% Client-Side Privacy:** All PDF parsing, signing, markup, encryption, redaction, compression, conversion, and rendering execute locally in browser memory. Files never touch external servers.
+*   **100% Client-Side Privacy:** All PDF parsing, OCR, speech synthesis, signing, markup, encryption, redaction, compression, conversion, and rendering execute locally in browser memory. Files never touch external servers.
 *   **Zero Telemetry & Tracking:** No tracking scripts, no third-party cookies, no sign-ups, and no server logs.
 *   **Zero Watermarks & Restrictions:** Clean documents without watermarks, artificial page limits, or paywalls.
 *   **WebAssembly & Web Workers:** Hardware-accelerated processing with background worker threads for smooth UI performance.
 
 ---
 
-## 🛠️ Complete Tool Suite (28 Tools)
+## 🛠️ Complete Tool Suite (35 Tools)
+
+### 🚀 Advanced & Smart Utilities Suite (7 Tools)
+1.  **OCR PDF (Optical Character Recognition):** On-device WebAssembly OCR powered by `tesseract.js` to convert scanned image PDFs into searchable, selectable text PDFs with bounding box previews and editable text export.
+2.  **Repair & Recover PDF:** Multi-stage client-side recovery engine (Ghostscript WASM + non-strict stream reconstructor) fixing damaged xref tables, corrupted trailers, and truncated streams.
+3.  **N-up / Multiple Pages per Sheet:** Layout multiple pages onto a single sheet (2-up, 4-up, 6-up, 8-up, 9-up, 16-up) with custom grid layouts, margins, separation borders, and booklet sheet sizing.
+4.  **PDF to Audio (Audiobook Reader):** In-browser speech synthesis player with multi-voice selection, rate/pitch adjustment, real-time sentence tracking, and audiobook player using Web Speech API.
+5.  **Audio / Speech to PDF Transcriber:** Live speech-to-text voice recognition transcribing microphone audio or meetings into styled, formatted PDF minutes and lecture notes with automatic timestamping.
+6.  **Extract Embedded Images & Assets:** Direct internal object stream inspection via PDF.js extracting all raw embedded JPEG, PNG, and WebP assets into an interactive gallery and downloadable ZIP archive.
+7.  **P2P Direct File Share:** True zero-server, end-to-end encrypted browser-to-browser direct transfer using WebRTC DataChannels with room codes and live transfer telemetry.
 
 ### ✍️ Editing, Signing & Annotations Suite (7 Tools)
 1.  **Sign PDF:** Draw, type cursive, or upload transparent digital signatures with visual drag-and-drop placement, scaling, and multi-page stamping.
@@ -63,25 +72,24 @@ OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite ru
                   │ Read as ArrayBuffer  │
                   └──────────┬───────────┘
                              ▼
-            ┌─────────────────┼─────────────────┐
-            │                 │                 │
-            ▼                 ▼                 ▼
- ┌─────────────────────┐ ┌────────────────┐ ┌─────────────────────┐
- │  pdf-lib / pdf.js   │ │ Web Crypto/RC4 │ │  Background Worker  │
- │  (Main UI Thread)   │ │  (Encryption)  │ │   (Multi-threaded)  │
- └──────────┬──────────┘ └───────┬────────┘ └──────────┬──────────┘
-            │                    │                     │
-            │ (Merge, Split,     │ (Password Protect,  │ (Ghostscript WASM
-            │  Sign, Annotate,   │  Permissions, Hash) │  Compression)
-            │  Convert, Redact)  │                     │
-            ▼                    ▼                     ▼
- ┌───────────────────────────────────────────────────────────────┐
- │                  Trigger Local Blob Download                  │
- └───────────────────────────────────────────────────────────────┘
+         ┌───────────────────┼───────────────────┐
+         │                   │                   │
+         ▼                   ▼                   ▼
+┌──────────────────┐ ┌────────────────┐ ┌─────────────────────┐
+│ pdf-lib / pdf.js │ │  Tesseract.js  │ │  Background Worker  │
+│ (Main UI Thread) │ │ (WASM OCR/AI)  │ │   (Multi-threaded)  │
+└────────┬─────────┘ └───────┬────────┘ └──────────┬──────────┘
+         │                   │                     │
+         │ (Merge, Split,    │ (OCR Searchable     │ (Ghostscript WASM
+         │  Sign, Annotate)  │  Text Embedding)    │  Compression/Repair)
+         ▼                   ▼                     ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 Trigger Local Blob Download                 │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### Dynamic Script Loading
-To keep the initial bundle lightweight, heavy dependencies (such as `pdf.js`, `xlsx`, `docx`, and `JSZip`) are loaded on-demand using a dynamic script injector loader script (`src/utils/loader.js`).
+To keep the initial bundle lightweight, heavy dependencies (such as `pdf.js`, `tesseract.js`, `xlsx`, `docx`, and `JSZip`) are loaded on-demand using a dynamic script injector loader script (`src/utils/loader.js`).
 
 ---
 
@@ -113,7 +121,7 @@ To keep the initial bundle lightweight, heavy dependencies (such as `pdf.js`, `x
 *   `/public`: Static assets, worker scripts, and WASM binaries:
     *   `background-worker.js`: Instantiates the WASM filesystem and intercepts logs.
     *   `gs-worker.js` / `gs.wasm`: Open-source Emscripten compiler ports of Ghostscript.
-*   `/src/tools`: Individual utility components (e.g. `SignPdfTool.jsx`, `WatermarkTool.jsx`, `EncryptPdfTool.jsx`, `CompressTool.jsx`).
+*   `/src/tools`: Individual utility components (e.g. `OcrPdfTool.jsx`, `RepairPdfTool.jsx`, `SignPdfTool.jsx`, `CompressTool.jsx`).
 *   `/src/utils`: Dynamic script loaders and CDN injectors (`loader.js`).
 
 ---

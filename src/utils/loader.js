@@ -15,7 +15,8 @@ export const Y = {
   html2pdf: "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js",
   xlsx: "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js",
   docx: "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js",
-  dompurify: "https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"
+  dompurify: "https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js",
+  tesseract: "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"
 };
 
 export const mo = {
@@ -53,7 +54,16 @@ export const mo = {
   fillform: ["pdflib", "pdfjs", "downloadjs"],
   annotatepdf: ["pdflib", "pdfjs", "downloadjs"],
   comparepdf: ["pdfjs", "downloadjs"],
-  invertcolors: ["pdfjs", "pdflib", "downloadjs"]
+  invertcolors: ["pdfjs", "pdflib", "downloadjs"],
+
+  // Advanced & Smart Utilities Suite
+  ocrpdf: ["pdfjs", "pdflib", "tesseract", "downloadjs"],
+  repairpdf: ["pdflib", "pdfjs", "downloadjs"],
+  nup: ["pdflib", "pdfjs", "downloadjs"],
+  pdftoaudio: ["pdfjs", "downloadjs"],
+  audiotopdf: ["pdflib", "downloadjs"],
+  extractimages: ["pdfjs", "jszip", "downloadjs"],
+  p2pshare: ["downloadjs"]
 };
 
 // Promise-based script loading helper

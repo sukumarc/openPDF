@@ -29,13 +29,29 @@ import {
   Highlighter,
   GitCompare,
   Moon,
+  ScanText,
+  Wrench,
+  LayoutGrid,
+  Headphones,
+  Mic,
+  ImageDown,
+  Radio,
   RefreshCw
 } from 'lucide-react'
 
 // Tools
 import Dashboard from './tools/Dashboard.jsx'
 
-// Editing, Signing & Annotations Tools
+// Advanced & Smart Utilities Tools (Category 5)
+import OcrPdfTool from './tools/OcrPdfTool.jsx'
+import RepairPdfTool from './tools/RepairPdfTool.jsx'
+import NUpTool from './tools/NUpTool.jsx'
+import PdfToAudioTool from './tools/PdfToAudioTool.jsx'
+import AudioToPdfTool from './tools/AudioToPdfTool.jsx'
+import ExtractImagesTool from './tools/ExtractImagesTool.jsx'
+import P2PShareTool from './tools/P2PShareTool.jsx'
+
+// Editing, Signing & Annotations Tools (Category 2)
 import SignPdfTool from './tools/SignPdfTool.jsx'
 import WatermarkTool from './tools/WatermarkTool.jsx'
 import PageNumbersTool from './tools/PageNumbersTool.jsx'
@@ -44,7 +60,7 @@ import AnnotatePdfTool from './tools/AnnotatePdfTool.jsx'
 import ComparePdfTool from './tools/ComparePdfTool.jsx'
 import InvertColorsTool from './tools/InvertColorsTool.jsx'
 
-// Security, Privacy & Compliance Tools
+// Security, Privacy & Compliance Tools (Category 3)
 import PrivacyScannerTool from './tools/PrivacyScannerTool.jsx'
 import RedactTool from './tools/RedactTool.jsx'
 import EncryptPdfTool from './tools/EncryptPdfTool.jsx'
@@ -53,7 +69,7 @@ import MetadataEditorTool from './tools/MetadataEditorTool.jsx'
 import FlattenPdfTool from './tools/FlattenPdfTool.jsx'
 import FingerprintTool from './tools/FingerprintTool.jsx'
 
-// Document Conversion Tools
+// Document Conversion Tools (Category 1)
 import PdfToJpgTool from './tools/PdfToJpgTool.jsx'
 import ImagesToPdfTool from './tools/ImagesToPdfTool.jsx'
 import WordToPdfTool from './tools/WordToPdfTool.jsx'
@@ -62,7 +78,7 @@ import ExcelToPdfTool from './tools/ExcelToPdfTool.jsx'
 import MarkdownToPdfTool from './tools/MarkdownToPdfTool.jsx'
 import ExtractTextTool from './tools/ExtractTextTool.jsx'
 
-// Page Management Tools
+// Page Management Tools (Category 4)
 import MergeTool from './tools/MergeTool.jsx'
 import SplitTool from './tools/SplitTool.jsx'
 import RotateTool from './tools/RotateTool.jsx'
@@ -92,6 +108,16 @@ export default function App() {
         setLoadingDeps(false)
       })
   }, [activeTool])
+
+  const smartMenuItems = [
+    { id: 'ocrpdf', name: 'OCR PDF', icon: ScanText },
+    { id: 'repairpdf', name: 'Repair & Recover', icon: Wrench },
+    { id: 'nup', name: 'N-up Handouts', icon: LayoutGrid },
+    { id: 'pdftoaudio', name: 'PDF to Audio', icon: Headphones },
+    { id: 'audiotopdf', name: 'Speech to PDF', icon: Mic },
+    { id: 'extractimages', name: 'Extract Images', icon: ImageDown },
+    { id: 'p2pshare', name: 'P2P Direct Share', icon: Radio }
+  ]
 
   const editingMenuItems = [
     { id: 'signpdf', name: 'Sign PDF', icon: PenTool },
@@ -142,7 +168,7 @@ export default function App() {
     if (loadingDeps) {
       return (
         <div className="flex flex-col items-center justify-center flex-1 h-[60vh] gap-4">
-          <div className="w-12 h-12 border-4 border-zinc-700 border-t-amber-500 rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-zinc-700 border-t-violet-500 rounded-full animate-spin"></div>
           <p className="text-zinc-400 text-sm animate-pulse font-medium">Securing local client libraries...</p>
         </div>
       )
@@ -151,6 +177,22 @@ export default function App() {
     switch (activeTool) {
       case 'dashboard':
         return <Dashboard onSelectTool={handleToolSelect} />
+
+      // Advanced & Smart Utilities Suite
+      case 'ocrpdf':
+        return <OcrPdfTool />
+      case 'repairpdf':
+        return <RepairPdfTool />
+      case 'nup':
+        return <NUpTool />
+      case 'pdftoaudio':
+        return <PdfToAudioTool />
+      case 'audiotopdf':
+        return <AudioToPdfTool />
+      case 'extractimages':
+        return <ExtractImagesTool />
+      case 'p2pshare':
+        return <P2PShareTool />
 
       // Editing, Signing & Annotations Suite
       case 'signpdf':
@@ -223,6 +265,7 @@ export default function App() {
 
   const allItems = [
     { id: 'dashboard', name: 'Dashboard' },
+    ...smartMenuItems,
     ...editingMenuItems,
     ...securityMenuItems,
     ...conversionMenuItems,
@@ -234,8 +277,8 @@ export default function App() {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-64 flex-col bg-zinc-900 border-r border-zinc-800 shrink-0">
         <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-800 select-none">
-          <div className="w-8 h-8 bg-amber-500/10 rounded-lg flex items-center justify-center border border-amber-500/20">
-            <ShieldCheck className="w-5 h-5 text-amber-400" />
+          <div className="w-8 h-8 bg-violet-500/10 rounded-lg flex items-center justify-center border border-violet-500/20">
+            <ShieldCheck className="w-5 h-5 text-violet-400" />
           </div>
           <span className="text-lg font-bold tracking-tight text-white">OpenPDF</span>
         </div>
@@ -246,7 +289,7 @@ export default function App() {
             onClick={() => handleToolSelect('dashboard')}
             className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
               activeTool === 'dashboard'
-                ? 'bg-amber-500 text-zinc-950 font-bold shadow-md shadow-amber-500/10'
+                ? 'bg-violet-600 text-white font-bold shadow-md shadow-violet-600/10'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
             }`}
           >
@@ -254,10 +297,36 @@ export default function App() {
             <span className="text-xs font-semibold">Dashboard</span>
           </button>
 
+          {/* Smart & Advanced Suite Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1.5 flex items-center justify-between">
+              <span>Smart & Utilities</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-violet-500/10 rounded text-violet-400">7</span>
+            </div>
+            {smartMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-violet-600 text-white font-bold shadow-md shadow-violet-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
           {/* Editing & Annotations Group */}
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1.5 flex items-center justify-between">
-              <span>Editing & Annotations</span>
+              <span>Editing & Signing</span>
               <span className="text-[9px] px-1.5 py-0.2 bg-amber-500/10 rounded text-amber-400">7</span>
             </div>
             {editingMenuItems.map((item) => {
@@ -364,7 +433,7 @@ export default function App() {
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
             100% Client-Side
           </span>
-          <span className="font-mono text-[11px] text-amber-400">28 Tools Active</span>
+          <span className="font-mono text-[11px] text-violet-400">35 Tools Active</span>
         </div>
       </aside>
 
@@ -383,14 +452,14 @@ export default function App() {
         }`}
       >
         <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-800">
-          <ShieldCheck className="w-5 h-5 text-amber-400" />
+          <ShieldCheck className="w-5 h-5 text-violet-400" />
           <span className="text-lg font-bold tracking-tight text-white">OpenPDF</span>
         </div>
         <nav className="flex-1 py-4 px-3 space-y-4 overflow-y-auto">
           <button
             onClick={() => handleToolSelect('dashboard')}
             className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-              activeTool === 'dashboard' ? 'bg-amber-500 text-zinc-950 font-bold' : 'text-zinc-400 hover:text-zinc-100'
+              activeTool === 'dashboard' ? 'bg-violet-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
             }`}
           >
             <LayoutDashboard className="w-4 h-4 shrink-0" />
@@ -398,8 +467,30 @@ export default function App() {
           </button>
 
           <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1">
+              Smart & Utilities (7)
+            </div>
+            {smartMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-violet-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1">
-              Editing & Annotations (7)
+              Editing & Signing (7)
             </div>
             {editingMenuItems.map((item) => {
               const Icon = item.icon

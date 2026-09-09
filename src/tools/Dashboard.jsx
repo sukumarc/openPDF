@@ -28,10 +28,69 @@ import {
   Highlighter,
   GitCompare,
   Moon,
+  ScanText,
+  Wrench,
+  LayoutGrid,
+  Headphones,
+  Mic,
+  ImageDown,
+  Radio,
   ArrowRight
 } from 'lucide-react'
 
 export default function Dashboard({ onSelectTool }) {
+  const smartTools = [
+    {
+      id: 'ocrpdf',
+      name: 'OCR PDF',
+      desc: 'On-device WebAssembly OCR to convert scanned PDFs into searchable, selectable text documents.',
+      icon: ScanText,
+      badge: 'AI / WASM'
+    },
+    {
+      id: 'repairpdf',
+      name: 'Repair & Recover',
+      desc: 'Fix corrupted PDF streams, damaged cross-reference (xref) tables, and unclosed trailers.',
+      icon: Wrench,
+      badge: 'Smart'
+    },
+    {
+      id: 'nup',
+      name: 'N-up Handouts',
+      desc: 'Combine 2, 4, 6, 8, 9, or 16 pages onto a single printed sheet with custom margins & borders.',
+      icon: LayoutGrid,
+      badge: 'Smart'
+    },
+    {
+      id: 'pdftoaudio',
+      name: 'PDF to Audio',
+      desc: 'Listen to PDF documents aloud with natural on-device speech synthesis and speed control.',
+      icon: Headphones,
+      badge: 'Voice'
+    },
+    {
+      id: 'audiotopdf',
+      name: 'Speech to PDF',
+      desc: 'Transcribe live microphone speech and meetings into formatted, timestamped PDF reports.',
+      icon: Mic,
+      badge: 'Voice'
+    },
+    {
+      id: 'extractimages',
+      name: 'Extract Images',
+      desc: 'Extract raw embedded raster images (JPEG, PNG, WebP) directly from internal PDF streams into a ZIP.',
+      icon: ImageDown,
+      badge: 'Smart'
+    },
+    {
+      id: 'p2pshare',
+      name: 'P2P Direct Share',
+      desc: 'End-to-end encrypted direct browser-to-browser PDF transfer via WebRTC with zero servers.',
+      icon: Radio,
+      badge: 'P2P'
+    }
+  ]
+
   const editingTools = [
     {
       id: 'signpdf',
@@ -249,16 +308,56 @@ export default function Dashboard({ onSelectTool }) {
             Privacy-First PDF Utility Sandbox 🔐
           </h2>
           <p className="text-zinc-400 text-sm max-w-xl">
-            All conversions, signatures, edits, watermarks, encryption, and merges are computed locally inside your browser cache. Files never touch external servers or upload targets.
+            All conversions, OCR, speech synthesis, signatures, encryption, and merges are computed locally inside your browser cache. Files never touch external servers.
           </p>
         </div>
         <div className="flex flex-wrap gap-2 shrink-0">
           <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full select-none">
             <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side Private
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full select-none">
-            <PenTool className="w-3.5 h-3.5" /> 28 In-Browser Tools
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1.5 rounded-full select-none">
+            <Cpu className="w-3.5 h-3.5" /> 35 In-Browser Tools
           </div>
+        </div>
+      </section>
+
+      {/* Advanced & Smart Utilities Suite Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-violet-500"></span>
+              Advanced & Smart Utilities Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">On-device WebAssembly OCR, PDF repair, N-up handouts, audio speech reader, and P2P sharing</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {smartTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-violet-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-violet-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-violet-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20 text-violet-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-violet-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
         </div>
       </section>
 
@@ -428,7 +527,7 @@ export default function Dashboard({ onSelectTool }) {
         <div className="space-y-1">
           <h4 className="text-sm font-semibold text-zinc-300">How Offline Execution Works</h4>
           <p className="text-zinc-500 text-xs leading-relaxed">
-            All document conversions, OCR, rendering, signatures, watermarks, cryptographic encryption, and compression run strictly inside your client's web browser sandboxed environment using JavaScript and WebAssembly. No files or metadata ever leave your computer.
+            All document conversions, OCR recognition, audio synthesis, signatures, watermarks, cryptographic encryption, and compression run strictly inside your client's web browser sandboxed environment using JavaScript and WebAssembly. No files or metadata ever leave your computer.
           </p>
         </div>
       </section>
