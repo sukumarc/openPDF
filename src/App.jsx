@@ -42,11 +42,27 @@ import {
   Palette,
   BookCopy,
   BoxSelect,
-  FileCheck
+  FileCheck,
+  Table,
+  QrCode,
+  Code2,
+  Sigma,
+  Eraser,
+  Tag,
+  Zap
 } from 'lucide-react'
 
 // Tools
 import Dashboard from './tools/Dashboard.jsx'
+
+// Developer, Data & Automation Tools (Category 8)
+import PdfTableExtractorTool from './tools/PdfTableExtractorTool.jsx'
+import BarcodeQrGeneratorTool from './tools/BarcodeQrGeneratorTool.jsx'
+import PdfObjectInspectorTool from './tools/PdfObjectInspectorTool.jsx'
+import LatexToPdfTool from './tools/LatexToPdfTool.jsx'
+import WatermarkCleanerTool from './tools/WatermarkCleanerTool.jsx'
+import BatchPdfRenamerTool from './tools/BatchPdfRenamerTool.jsx'
+import PdfVectorOptimizerTool from './tools/PdfVectorOptimizerTool.jsx'
 
 // Specialized Formats, Archival & Publishing Tools (Category 6)
 import PptxToPdfTool from './tools/PptxToPdfTool.jsx'
@@ -123,6 +139,16 @@ export default function App() {
         setLoadingDeps(false)
       })
   }, [activeTool])
+
+  const developerMenuItems = [
+    { id: 'tableextractor', name: 'PDF Tables to Excel', icon: Table },
+    { id: 'barcodegenerator', name: 'Batch QR & Barcodes', icon: QrCode },
+    { id: 'objectinspector', name: 'PDF Object AST', icon: Code2 },
+    { id: 'latextopdf', name: 'LaTeX & Math to PDF', icon: Sigma },
+    { id: 'watermarkcleaner', name: 'Watermark Cleaner', icon: Eraser },
+    { id: 'batchrenamer', name: 'Smart Batch Renamer', icon: Tag },
+    { id: 'vectoroptimizer', name: 'Vector Optimizer', icon: Zap }
+  ]
 
   const specializedMenuItems = [
     { id: 'pptxtopdf', name: 'PowerPoint to PDF', icon: Presentation },
@@ -202,6 +228,22 @@ export default function App() {
     switch (activeTool) {
       case 'dashboard':
         return <Dashboard onSelectTool={handleToolSelect} />
+
+      // Developer, Data & Automation Suite (Category 8)
+      case 'tableextractor':
+        return <PdfTableExtractorTool />
+      case 'barcodegenerator':
+        return <BarcodeQrGeneratorTool />
+      case 'objectinspector':
+        return <PdfObjectInspectorTool />
+      case 'latextopdf':
+        return <LatexToPdfTool />
+      case 'watermarkcleaner':
+        return <WatermarkCleanerTool />
+      case 'batchrenamer':
+        return <BatchPdfRenamerTool />
+      case 'vectoroptimizer':
+        return <PdfVectorOptimizerTool />
 
       // Specialized Formats, Archival & Publishing Suite
       case 'pptxtopdf':
@@ -306,6 +348,7 @@ export default function App() {
 
   const allItems = [
     { id: 'dashboard', name: 'Dashboard' },
+    ...developerMenuItems,
     ...specializedMenuItems,
     ...smartMenuItems,
     ...editingMenuItems,
@@ -443,6 +486,32 @@ export default function App() {
             })}
           </div>
 
+          {/* Developer & Automation Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1.5 flex items-center justify-between">
+              <span>Developer & Data</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-pink-500/10 rounded text-pink-400">7</span>
+            </div>
+            {developerMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-pink-600 text-white font-bold shadow-md shadow-pink-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
           {/* Specialized Formats, Archival & Publishing Suite Group */}
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1.5 flex items-center justify-between">
@@ -501,7 +570,7 @@ export default function App() {
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
             100% Client-Side
           </span>
-          <span className="font-mono text-[11px] text-teal-400">42 Tools Active</span>
+          <span className="font-mono text-[11px] text-pink-400">49 Tools Active</span>
         </div>
       </aside>
 
@@ -533,6 +602,28 @@ export default function App() {
             <LayoutDashboard className="w-4 h-4 shrink-0" />
             <span className="text-xs font-semibold">Dashboard</span>
           </button>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1">
+              Developer & Data (7)
+            </div>
+            {developerMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-pink-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
 
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1">

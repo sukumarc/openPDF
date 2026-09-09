@@ -35,13 +35,19 @@ import {
   Mic,
   ImageDown,
   Radio,
-  ArrowRight,
   Presentation,
   BookOpen,
   Palette,
   BookCopy,
   BoxSelect,
-  FileCheck
+  FileCheck,
+  Table,
+  QrCode,
+  Code2,
+  Sigma,
+  Eraser,
+  Tag,
+  Zap
 } from 'lucide-react'
 
 export default function Dashboard({ onSelectTool }) {
@@ -357,6 +363,58 @@ export default function Dashboard({ onSelectTool }) {
     }
   ]
 
+  const developerTools = [
+    {
+      id: 'tableextractor',
+      name: 'PDF Tables to Excel / CSV',
+      desc: 'Auto-detect row & column grid boundaries from PDF coordinates and export to Excel (.xlsx), CSV, or JSON.',
+      icon: Table,
+      badge: 'Data'
+    },
+    {
+      id: 'barcodegenerator',
+      name: 'Batch QR & Barcodes',
+      desc: 'Generate printable Avery label sheets and sticker grids for QR codes, Code-128, and EAN-13 barcodes.',
+      icon: QrCode,
+      badge: 'Automation'
+    },
+    {
+      id: 'objectinspector',
+      name: 'PDF Object Tree & AST',
+      desc: 'Developer AST debugger inspecting indirect objects, dictionary keys, and raw decompressed streams.',
+      icon: Code2,
+      badge: 'Developer'
+    },
+    {
+      id: 'latextopdf',
+      name: 'LaTeX & Math to PDF',
+      desc: 'Compile academic formulas, calculus proofs, and AI loss functions into vector PDF documents via KaTeX.',
+      icon: Sigma,
+      badge: 'Developer'
+    },
+    {
+      id: 'watermarkcleaner',
+      name: 'Watermark & Stamp Cleaner',
+      desc: 'Scrub faint background watermark stamps, evaluation banners, and draft overlays while preserving sharp text.',
+      icon: Eraser,
+      badge: 'Automation'
+    },
+    {
+      id: 'batchrenamer',
+      name: 'Smart Batch Renamer',
+      desc: 'Batch analyze PDFs and dynamically rename files based on extracted invoices, dates, and titles into a ZIP.',
+      icon: Tag,
+      badge: 'Automation'
+    },
+    {
+      id: 'vectoroptimizer',
+      name: 'Vector Stream Optimizer',
+      desc: 'Lossless structural cleaner purging unreferenced ghost objects, compacting xref tables, and trimming size.',
+      icon: Zap,
+      badge: 'Developer'
+    }
+  ]
+
   return (
     <div className="space-y-10 max-w-5xl mx-auto">
       {/* Welcome Banner */}
@@ -374,7 +432,7 @@ export default function Dashboard({ onSelectTool }) {
             <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side Private
           </div>
           <div className="flex items-center gap-1.5 text-[11px] font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1.5 rounded-full select-none">
-            <Cpu className="w-3.5 h-3.5" /> 42 In-Browser Tools
+            <Cpu className="w-3.5 h-3.5" /> 49 In-Browser Tools
           </div>
         </div>
       </section>
@@ -608,6 +666,46 @@ export default function Dashboard({ onSelectTool }) {
                   {tool.badge}
                 </div>
                 <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-teal-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Developer, Data & Automation Suite Section (Category 8) */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-pink-500"></span>
+              Developer, Data & Automation Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">PDF table extraction to Excel/CSV, batch barcode sheets, AST object debugger, LaTeX math, and watermark scrubbers</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {developerTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-pink-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-pink-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-pink-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-pink-500/10 border border-pink-500/20 text-pink-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-pink-400 transition-colors">
                   {tool.name}
                 </h4>
                 <p className="text-zinc-400 text-xs leading-relaxed">

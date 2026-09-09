@@ -1,6 +1,6 @@
 # OpenPDF 🔐
 
-OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **42 essential tools** across Specialized Formats & Archival, Smart & Advanced Utilities, Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
+OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite running entirely inside your web browser. Using WebAssembly (WASM), Web Workers, and modern browser cryptography, OpenPDF provides **49 essential tools** across Developer & Data Automation, Specialized Formats & Archival, Smart & Advanced Utilities, Editing & Signing, Security & Privacy, Document Conversion, and Page Management—completely offline with zero server uploads.
 
 ---
 
@@ -12,7 +12,16 @@ OpenPDF is a comprehensive, privacy-first, 100% client-side PDF utility suite ru
 
 ---
 
-## 🛠️ Complete Tool Suite (42 Tools)
+## 🛠️ Complete Tool Suite (49 Tools)
+
+### 💻 Developer, Data Extraction & Vector Automation Suite (7 Tools)
+1.  **PDF Tables to Excel / CSV / JSON:** Heuristic spatial coordinate clustering engine that reconstructs tabular data, grids, and financial reports into downloadable Excel (`.xlsx`), CSV, and JSON structures with live table preview.
+2.  **Batch QR & Barcode Sheet Generator:** High-density barcode (`CODE128`, `EAN-13`, `UPC`, `CODE39`) & QR matrix sheet synthesizer with Avery label templates (e.g. 5160, 5163, Custom grid layouts) and direct PDF export.
+3.  **PDF Object Tree & Cos Syntax Inspector:** Interactive low-level PDF dictionary AST debugger. Traverses `/Root`, `/Pages`, `/Catalog`, `/Info`, font descriptors, stream lengths, and filters with raw stream viewer and search.
+4.  **LaTeX & Math Formula to PDF:** Real-time client-side LaTeX compiler powered by KaTeX with split-pane code editor, template presets (Physics, Calculus, Matrix, Academic Theorem), and high-DPI vector rendering.
+5.  **Watermark, Stamp & Artifact Cleaner:** Targeted object stripper removing diagonal watermark text, background overlay stamps, and header/footer noise while strictly preserving vector paths and text content.
+6.  **Smart Batch PDF File Renamer:** Extract dynamic data (dates, invoice/quote numbers, emails, title heuristics, or custom regex captures) to batch-rename collections of PDFs into standardized filenames in a single ZIP.
+7.  **Lossless Vector & Stream Optimizer:** Structural vector optimizer that purges unreferenced orphan objects, consolidates identical XObject resources, compresses content streams, and cleans document overhead.
 
 ### 📚 Specialized Formats, Archival & Publishing Suite (7 Tools)
 1.  **PowerPoint (.pptx) to PDF:** In-memory XML presentation unpacker extracting shapes, slide text hierarchies, and embedded graphics into formatted vector PDF slides.

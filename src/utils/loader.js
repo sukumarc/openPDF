@@ -16,7 +16,10 @@ export const Y = {
   xlsx: "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js",
   docx: "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js",
   dompurify: "https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js",
-  tesseract: "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"
+  tesseract: "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js",
+  qrcode: "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js",
+  jsbarcode: "https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js",
+  katex: "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
 };
 
 export const mo = {
@@ -72,7 +75,16 @@ export const mo = {
   grayscale: ["pdfjs", "pdflib", "downloadjs"],
   booklet: ["pdflib", "pdfjs", "downloadjs"],
   margins: ["pdflib", "pdfjs", "downloadjs"],
-  pdfavalidator: ["pdflib", "pdfjs", "downloadjs"]
+  pdfavalidator: ["pdflib", "pdfjs", "downloadjs"],
+
+  // Developer, Data & Automation Suite (Category 8)
+  tableextractor: ["pdfjs", "xlsx", "downloadjs"],
+  barcodegenerator: ["pdflib", "qrcode", "jsbarcode", "downloadjs"],
+  objectinspector: ["pdfjs", "pdflib", "downloadjs"],
+  latextopdf: ["katex", "jspdf", "html2canvas", "dompurify", "downloadjs"],
+  watermarkcleaner: ["pdfjs", "pdflib", "downloadjs"],
+  batchrenamer: ["pdfjs", "jszip", "downloadjs"],
+  vectoroptimizer: ["pdflib", "downloadjs"]
 };
 
 // Promise-based script loading helper
@@ -109,6 +121,7 @@ export const J = async (toolId) => {
   // Load all pending scripts in parallel
   await Promise.all(unloaded.map((dep) => K(Y[dep])));
   setupPdfjsWorker();
+  setupExternalStyles(toolId);
 };
 
 // Helper to configure pdfjs worker if loaded
@@ -116,5 +129,18 @@ function setupPdfjsWorker() {
   if (window.pdfjsLib && !window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
     window.pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  }
+}
+
+// Helper to load external CSS stylesheets
+function setupExternalStyles(toolId) {
+  if (toolId === 'latextopdf') {
+    const cssHref = "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css";
+    if (!document.querySelector(`link[href="${cssHref}"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = cssHref;
+      document.head.appendChild(link);
+    }
   }
 }
