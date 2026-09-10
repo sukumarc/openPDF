@@ -437,127 +437,7 @@ export default function Dashboard({ onSelectTool }) {
         </div>
       </section>
 
-      {/* Advanced & Smart Utilities Suite Section */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-violet-500"></span>
-              Advanced & Smart Utilities Suite
-            </h3>
-            <p className="text-xs text-zinc-500 mt-0.5">On-device WebAssembly OCR, PDF repair, N-up handouts, audio speech reader, and P2P sharing</p>
-          </div>
-          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {smartTools.map((tool) => {
-            const Icon = tool.icon
-            return (
-              <button
-                key={tool.id}
-                onClick={() => onSelectTool(tool.id)}
-                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-violet-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
-              >
-                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-violet-500/40 transition-colors">
-                  <Icon className="w-5 h-5 text-violet-400" />
-                </div>
-                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20 text-violet-400">
-                  {tool.badge}
-                </div>
-                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-violet-400 transition-colors">
-                  {tool.name}
-                </h4>
-                <p className="text-zinc-400 text-xs leading-relaxed">
-                  {tool.desc}
-                </p>
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Editing, Signing & Annotations Suite Section */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-500"></span>
-              Editing, Signing & Annotations Suite
-            </h3>
-            <p className="text-xs text-zinc-500 mt-0.5">Sign, watermark, number, fill forms, markup, compare, and invert PDFs</p>
-          </div>
-          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {editingTools.map((tool) => {
-            const Icon = tool.icon
-            return (
-              <button
-                key={tool.id}
-                onClick={() => onSelectTool(tool.id)}
-                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-amber-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
-              >
-                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-amber-500/40 transition-colors">
-                  <Icon className="w-5 h-5 text-amber-400" />
-                </div>
-                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-400">
-                  {tool.badge}
-                </div>
-                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-amber-400 transition-colors">
-                  {tool.name}
-                </h4>
-                <p className="text-zinc-400 text-xs leading-relaxed">
-                  {tool.desc}
-                </p>
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Security & Privacy Suite Section */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              Security, Privacy & Compliance Suite
-            </h3>
-            <p className="text-xs text-zinc-500 mt-0.5">Protect, redact, sanitize, encrypt, and audit sensitive PDF documents</p>
-          </div>
-          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {securityTools.map((tool) => {
-            const Icon = tool.icon
-            return (
-              <button
-                key={tool.id}
-                onClick={() => onSelectTool(tool.id)}
-                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-emerald-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
-              >
-                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-emerald-500/40 transition-colors">
-                  <Icon className="w-5 h-5 text-emerald-400" />
-                </div>
-                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                  {tool.badge}
-                </div>
-                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-emerald-400 transition-colors">
-                  {tool.name}
-                </h4>
-                <p className="text-zinc-400 text-xs leading-relaxed">
-                  {tool.desc}
-                </p>
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Conversion Suite Section */}
+      {/* Document Conversion Suite Section */}
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
           <div>
@@ -637,6 +517,126 @@ export default function Dashboard({ onSelectTool }) {
         </div>
       </section>
 
+      {/* Editing, Signing & Annotations Suite Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+              Editing, Signing & Annotations Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">Sign, watermark, number, fill forms, markup, compare, and invert PDFs</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {editingTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-amber-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-amber-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-amber-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-amber-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Advanced & Smart Utilities Suite Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-violet-500"></span>
+              Advanced & Smart Utilities Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">On-device WebAssembly OCR, PDF repair, N-up handouts, audio speech reader, and P2P sharing</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {smartTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-violet-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-violet-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-violet-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20 text-violet-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-violet-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Security & Privacy Suite Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Security, Privacy & Compliance Suite
+            </h3>
+            <p className="text-xs text-zinc-500 mt-0.5">Protect, redact, sanitize, encrypt, and audit sensitive PDF documents</p>
+          </div>
+          <span className="text-xs text-zinc-500 font-mono">7 Tools</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {securityTools.map((tool) => {
+            const Icon = tool.icon
+            return (
+              <button
+                key={tool.id}
+                onClick={() => onSelectTool(tool.id)}
+                className="group relative flex flex-col items-start p-5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-emerald-500/40 hover:bg-zinc-850 text-left transition-all duration-200 shadow-md shadow-black/10 cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-3.5 group-hover:border-emerald-500/40 transition-colors">
+                  <Icon className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div className="absolute top-5 right-5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                  {tool.badge}
+                </div>
+                <h4 className="text-sm font-bold text-zinc-100 mb-1 group-hover:text-emerald-400 transition-colors">
+                  {tool.name}
+                </h4>
+                <p className="text-zinc-400 text-xs leading-relaxed">
+                  {tool.desc}
+                </p>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
       {/* Specialized Formats, Archival & Publishing Suite Section */}
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
@@ -677,7 +677,7 @@ export default function Dashboard({ onSelectTool }) {
         </div>
       </section>
 
-      {/* Developer, Data & Automation Suite Section (Category 8) */}
+      {/* Developer, Data & Automation Suite Section */}
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3">
           <div>

@@ -348,13 +348,13 @@ export default function App() {
 
   const allItems = [
     { id: 'dashboard', name: 'Dashboard' },
-    ...developerMenuItems,
-    ...specializedMenuItems,
-    ...smartMenuItems,
-    ...editingMenuItems,
-    ...securityMenuItems,
     ...conversionMenuItems,
-    ...pageManagementMenuItems
+    ...pageManagementMenuItems,
+    ...editingMenuItems,
+    ...smartMenuItems,
+    ...securityMenuItems,
+    ...specializedMenuItems,
+    ...developerMenuItems
   ]
 
   return (
@@ -382,13 +382,13 @@ export default function App() {
             <span className="text-xs font-semibold">Dashboard</span>
           </button>
 
-          {/* Smart & Advanced Suite Group */}
+          {/* Conversion Suite Group */}
           <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1.5 flex items-center justify-between">
-              <span>Smart & Utilities</span>
-              <span className="text-[9px] px-1.5 py-0.2 bg-violet-500/10 rounded text-violet-400">7</span>
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-blue-400/80 mb-1.5 flex items-center justify-between">
+              <span>Conversion Suite</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-blue-500/10 rounded text-blue-400">7</span>
             </div>
-            {smartMenuItems.map((item) => {
+            {conversionMenuItems.map((item) => {
               const Icon = item.icon
               const active = activeTool === item.id
               return (
@@ -397,7 +397,33 @@ export default function App() {
                   onClick={() => handleToolSelect(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
                     active
-                      ? 'bg-violet-600 text-white font-bold shadow-md shadow-violet-600/10'
+                      ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Page Management Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-purple-400/80 mb-1.5 flex items-center justify-between">
+              <span>Page Management</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-purple-500/10 rounded text-purple-400">7</span>
+            </div>
+            {pageManagementMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-purple-600 text-white font-medium shadow-md shadow-purple-600/10'
                       : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
                   }`}
                 >
@@ -434,6 +460,32 @@ export default function App() {
             })}
           </div>
 
+          {/* Smart & Advanced Suite Group */}
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1.5 flex items-center justify-between">
+              <span>Smart & Utilities</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-violet-500/10 rounded text-violet-400">7</span>
+            </div>
+            {smartMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
+                    active
+                      ? 'bg-violet-600 text-white font-bold shadow-md shadow-violet-600/10'
+                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
           {/* Security Suite Group */}
           <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 mb-1.5 flex items-center justify-between">
@@ -450,58 +502,6 @@ export default function App() {
                   className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
                     active
                       ? 'bg-emerald-600 text-white font-medium shadow-md shadow-emerald-600/10'
-                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Conversion Suite Group */}
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-blue-400/80 mb-1.5 flex items-center justify-between">
-              <span>Conversion Suite</span>
-              <span className="text-[9px] px-1.5 py-0.2 bg-blue-500/10 rounded text-blue-400">7</span>
-            </div>
-            {conversionMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
-                    active
-                      ? 'bg-blue-600 text-white font-medium shadow-md shadow-blue-600/10'
-                      : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Developer & Automation Group */}
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1.5 flex items-center justify-between">
-              <span>Developer & Data</span>
-              <span className="text-[9px] px-1.5 py-0.2 bg-pink-500/10 rounded text-pink-400">7</span>
-            </div>
-            {developerMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
-                    active
-                      ? 'bg-pink-600 text-white font-bold shadow-md shadow-pink-600/10'
                       : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
                   }`}
                 >
@@ -538,13 +538,13 @@ export default function App() {
             })}
           </div>
 
-          {/* Page Management Group */}
+          {/* Developer & Automation Group */}
           <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-purple-400/80 mb-1.5 flex items-center justify-between">
-              <span>Page Management</span>
-              <span className="text-[9px] px-1.5 py-0.2 bg-purple-500/10 rounded text-purple-400">7</span>
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1.5 flex items-center justify-between">
+              <span>Developer & Data</span>
+              <span className="text-[9px] px-1.5 py-0.2 bg-pink-500/10 rounded text-pink-400">7</span>
             </div>
-            {pageManagementMenuItems.map((item) => {
+            {developerMenuItems.map((item) => {
               const Icon = item.icon
               const active = activeTool === item.id
               return (
@@ -553,7 +553,7 @@ export default function App() {
                   onClick={() => handleToolSelect(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors select-none text-left ${
                     active
-                      ? 'bg-purple-600 text-white font-medium shadow-md shadow-purple-600/10'
+                      ? 'bg-pink-600 text-white font-bold shadow-md shadow-pink-600/10'
                       : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60'
                   }`}
                 >
@@ -604,116 +604,6 @@ export default function App() {
           </button>
 
           <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1">
-              Developer & Data (7)
-            </div>
-            {developerMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-                    active ? 'bg-pink-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1">
-              Archival & Publishing (7)
-            </div>
-            {specializedMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-                    active ? 'bg-teal-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1">
-              Smart & Utilities (7)
-            </div>
-            {smartMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-                    active ? 'bg-violet-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1">
-              Editing & Signing (7)
-            </div>
-            {editingMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-                    active ? 'bg-amber-500 text-zinc-950 font-bold' : 'text-zinc-400 hover:text-zinc-100'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="space-y-1">
-            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 mb-1">
-              Security & Privacy (7)
-            </div>
-            {securityMenuItems.map((item) => {
-              const Icon = item.icon
-              const active = activeTool === item.id
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleToolSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
-                    active ? 'bg-emerald-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 shrink-0" />
-                  <span className="text-xs font-medium">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="space-y-1">
             <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-blue-400/80 mb-1">
               Conversion Suite (7)
             </div>
@@ -748,6 +638,116 @@ export default function App() {
                   onClick={() => handleToolSelect(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
                     active ? 'bg-purple-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 mb-1">
+              Editing & Signing (7)
+            </div>
+            {editingMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-amber-500 text-zinc-950 font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-violet-400/80 mb-1">
+              Smart & Utilities (7)
+            </div>
+            {smartMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-violet-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 mb-1">
+              Security & Privacy (7)
+            </div>
+            {securityMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-emerald-600 text-white font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-teal-400/80 mb-1">
+              Archival & Publishing (7)
+            </div>
+            {specializedMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-teal-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-medium">{item.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="space-y-1">
+            <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-pink-400/80 mb-1">
+              Developer & Data (7)
+            </div>
+            {developerMenuItems.map((item) => {
+              const Icon = item.icon
+              const active = activeTool === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleToolSelect(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2 rounded-lg transition-colors text-left ${
+                    active ? 'bg-pink-600 text-white font-bold' : 'text-zinc-400 hover:text-zinc-100'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
